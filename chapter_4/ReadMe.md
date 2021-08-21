@@ -59,4 +59,28 @@
 
 
 
-6. 
+6. 부트스트랩 css에 정의해놓은 container 사용
+
+about_me.html 확인
+
+```html
+    <div class="container">
+        <h1>About Me</h1>
+        <h2>정연우 입니다. </h2>
+
+        <p>Django로 웹사이트 만들기</p>
+
+        <button onclick="whatTimeIsIt()">현재시간</button>
+        <hr/>
+        
+        <a href = "index.html">첫 화면으로 가기</a>
+        <img src="images/boys_and_father.jpg" height="400px">
+	 </div>
+    (...생략...)
+```
+
+양쪽에 여백이 생김
+
+
+
+navbar에도 적용해봄
