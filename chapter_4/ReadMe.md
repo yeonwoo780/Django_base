@@ -145,3 +145,98 @@ Documentation > Layout > Grid
 ```
 
 위의 배경색은 Documetation > Utilities > Colors 이용
+
+
+
+8. spacing으로 간격주기
+
+마진, 패딩 이용
+
+
+
+- 내비게이션 바에 마진 넣기
+
+  mt-숫자는 위에만 마진(margin top), mb-숫자는 아래에만 마진(margin bottom), my-숫자는 위아래
+
+```html
+    <div class="container">
+        <div class = "row my-3">
+            <div class = "col-9">
+                <h1>About Me</h1>
+                <h2>정연우 입니다. </h2>
+
+                <p>Django로 웹사이트 만들기</p>
+
+                <button onclick="whatTimeIsIt()">현재시간</button>
+                <hr/>
+                
+                <a href = "index.html">첫 화면으로 가기</a>
+            </div>
+			(...생략...)
+
+    </div>
+```
+
+
+
+- 내비게이션 바 오른쪽 정렬
+
+  ml-auto 는 왼쪽 마진 확보, mr-auto 는 오른쪽 마진 확보
+
+  ```html
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  			(...생략...)
+              </ul>
+  
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Log In</a>
+                  </li>
+              </ul>
+              </div>
+          </div>
+      </nav>
+  ```
+
+  위랑 결과 같음
+
+  ```html
+              <ul class="navbar-nav  mr-auto">
+                  <li class="nav-item active">
+                  <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="./blog_list.html">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="./about_me.html">About me</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown link
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                  </li>
+              </ul>
+  
+  			(...밑의값 변경시 똑같이 나옴...)
+  			<!--<ul class="navbar-nav ml-auto">-->
+  			<ul class="navbar-nav">
+  ```
+
+
+
+
+
+## 부트스트랩으로 웹사이트 모양 만들기
+
+- 부트스트랩 적용
+
+start bootstrap의 Blog Home 의 index.html 참조
+
+ctrl + U눌러서 원하는 코드 참조 복사
+
