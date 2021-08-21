@@ -84,3 +84,64 @@ about_me.html 확인
 
 
 navbar에도 적용해봄
+
+
+
+7. grid로 웹페이지 비율 나누기(12 기준)
+
+비율 9대 3만듦
+
+```html
+    <div class="container">
+        <div class = "row">
+            <div class = "col-9">
+                <h1>About Me</h1>
+                <h2>정연우 입니다. </h2>
+
+                <p>Django로 웹사이트 만들기</p>
+
+                <button onclick="whatTimeIsIt()">현재시간</button>
+                <hr/>
+                
+                <a href = "index.html">첫 화면으로 가기</a>
+            </div>
+
+            <div class = "col-3">
+                <img src="images/boys_and_father.jpg" class="img-fluid w-100">
+                <!-- 높이가 3칸짜리 열에 해당하는 부분의 폭에 꽉차게 적용 -->
+            </div>
+        </div>
+    </div>
+```
+
+
+
+- 화면 크기에 따라 구성도 변경
+
+Documentation > Layout > Grid
+
+```html
+    <div class="container">
+        <div class = "row">
+			(...생략...)
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm bg-info">
+                    One of three columns
+                </div>
+                <div class="col-sm bg-secondary">
+                    One of three columns
+                </div>
+                <div class="col-sm bg-warning">
+                    One of three columns
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+```
+
+위의 배경색은 Documetation > Utilities > Colors 이용
