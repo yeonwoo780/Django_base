@@ -327,3 +327,51 @@ ctrl + U눌러서 원하는 코드 참조 복사
     </div>
 ```
 
+
+
+- 로그인 창에다가 버튼 추가
+
+```html
+<!-- Modal -->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        (...생략...)
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-dark">Login in with Google</button>
+                        <button type="button" class="btn btn-outline-dark">Login in with E-mail</button>
+                    </div>
+
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-dark">Sign Up with E-mail</button>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="modal-footer">
+			(...생략...)
+```
+
+
+
+- 버튼에 아이콘 추가 (fontawesome 이용)
+
+```html
+<link href="./bootstrap4/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/a8a517f3a9.js" crossorigin="anonymous"></script>
+</head>
+
+(...생략...)
+
+            <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+            <!-- <h5 class="modal-title" id="loginModalLabel">Login</h5> -->
+            <h5 class="modal-title" id="loginModalLabel"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+```
+
