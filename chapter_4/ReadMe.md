@@ -272,3 +272,58 @@ ctrl + U눌러서 원하는 코드 참조 복사
                 (...생략...)
 ```
 
+
+
+- footer 맨밑에 고유 Copyright 생성
+
+```html
+    (...생략...)
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">
+                Copyright &copy; Django YeonWoo
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+```
+
+
+
+- 모달로 로그인창 추가 (변경이 필요한 내용은 변경해줌)
+
+```html
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="#">Log In</a> -->
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal -->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+            <h5 class="modal-title" id="loginModalLabel">Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+```
+
