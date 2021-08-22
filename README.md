@@ -218,3 +218,120 @@ Running migrations:
 (Django_base) PS C:\Anaconda_python\Django_base> python manage.py runserver
 ```
 
+-----
+
+-----
+
+-----
+
+----
+
+-----
+
+
+
+# URL 설정하기
+
+
+
+urls.py 는 표지판 역할
+
+do_it_django_prj/urls.py 
+
+
+
+블로그 페이지는 '도메인/blog/포스트의 pk'
+
+
+
+자기소개 페이지는 "도메인/about_me/"
+
+
+
+- url을 설정해야한다
+
+url 설정하지 않았을시
+
+```
+http://127.0.0.1:8000/blog <-- 주소로 들어 갔을시 안나옴
+
+Not Found: /blog
+[22/Aug/2021 21:57:26] "GET /blog HTTP/1.1" 404 2099
+```
+
+
+
+- 방문자가 blog들어왔을시  보이게 설정
+
+do_it_django_prj/urls.py 
+
+```python
+from django.contrib import admin
+from django.urls import path
+from django.urls import include
+
+urlpatterns = [
+    path('blog', include('blog.urls')),
+    path('admin/', admin.site.urls),
+]
+```
+
+
+
+blog/urls.py
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    # 이 부분 채울 예정
+]
+```
+
+
+
+## FBV로 페이지 만들기
+
+blog/urls.py
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index)
+]
+```
+
+
+
+blog/views.py에 index()함수 정의
+
+```python
+from django.shortcuts import render
+
+def index(request):
+    return render(
+        request,
+        'blog/index.html',
+    )
+```
+
+
+
+blog/templates/blog/index.html
+
+```html
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+    <h1>Blog</h1>
+</body>
+</html>
+```
+
