@@ -48,3 +48,24 @@ Superuser created successfully.
 
 서버 실행하여 127.0.0.1:8000/admin/ 으로 접속하여 관리자 계정 확인
 
+-----
+
+-----
+
+-----
+
+-----
+
+----
+
+
+
+# Blog 앱과 Page앱 만들기
+
+python manage.py startapp 이름
+
+```
+(Django_base) PS C:\Anaconda_python\Django_base> python manage.py startapp blog
+(Django_base) PS C:\Anaconda_python\Django_base> python manage.py startapp single_pages
+```
+
