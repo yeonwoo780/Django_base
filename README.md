@@ -335,3 +335,90 @@ blog/templates/blog/index.html
 </html>
 ```
 
+
+
+
+
+### 블로그 페이지에 포스트 목록 나열
+
+
+
+blog/views.py
+
+```python
+from django.shortcuts import render
+from .models import Post
+
+def index(request):
+    posts = Post.objects.all()  # 모든 Post레코드를 가져와 저장
+
+    return render(
+        request,
+        'blog/index.html',
+        {
+            'posts' : posts
+        }
+    )
+```
+
+
+
+blog/templates/blog/index.html
+
+```html
+</head>
+<body>
+    <h1>Blog</h1>
+
+{% for p in posts %}
+    <h3>{{p}}</h3>
+{% endfor %}
+</body>
+</html>
+```
+
+
+
+
+
+### Post 모델의 필드값 보여주기
+
+
+
+blog/templates/blog/index.html
+
+```html
+<body>
+    <h1>Blog</h1>
+
+{% for p in posts %}
+    <hr/>
+    <h2>{{ p.title }}</h2>
+    <h4>{{ p.created_at }}</h4>
+    <p>{{ p.content }}</p>
+{% endfor %}
+</body>
+</html>
+```
+
+
+
+blog/views.py
+
+```python
+from django.shortcuts import render
+from .models import Post # models 에있는 Post모델 들고옴
+
+def index(request):
+    # posts = Post.objects.all()  # 모든 Post레코드를 가져와 저장
+    posts = Post.objects.all().order_by('-pk')  # 모든 Post레코드를 가져와 저장 (가장 최신값으로 업데이트)
+
+    return render(
+        request,
+        'blog/index.html',
+        {
+            'posts' : posts
+        }
+    )
+```
+
