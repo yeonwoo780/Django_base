@@ -356,7 +356,7 @@ def index(request):
         request,
         'blog/index.html',
         {
-            'posts' : posts
+            'posts' : posts,
         }
     )
 ```
@@ -420,5 +420,74 @@ def index(request):
             'posts' : posts
         }
     )
+```
+
+
+
+
+
+## FBV로 포스트 상세 페이지 만들기
+
+
+
+### 포스트 상세 페이지 URL 정의하기
+
+
+
+blog/urls.py
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('/<int:pk>/', views.single_post_page), #/blog/ 뒤에 int형태의 값이 붙는 형태라면 single 함수로 처리
+    path('', views.index),
+]
+```
+
+
+
+blog/views.py에 single_post_page()함수 정의
+
+```
+def single_post_page(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    return render(
+        request,
+        'blog/single_post_page.html',
+        {
+            'post': post
+        }
+    )
+```
+
+
+
+blog/templates/blog/single_post_page.html
+
+```html
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }} - Blog</title>
+</head>
+
+<body>
+
+<nav>
+    <a href = "/blog/">Blog</a>
+</nav>
+
+<h1>{{ post.title }}</h1>
+<h4>{{ post.created_at }}</h4>
+<p>{{ post.content }}</p>
+<hr/>
+<h3>댓글 자리!</h3>
+
+</body>
+</html>
 ```
 
