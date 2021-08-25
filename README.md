@@ -271,7 +271,7 @@ from django.urls import path
 from django.urls import include
 
 urlpatterns = [
-    path('blog', include('blog.urls')),
+    path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
 ]
 ```
@@ -441,7 +441,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('/<int:pk>/', views.single_post_page), #/blog/ 뒤에 int형태의 값이 붙는 형태라면 single 함수로 처리
+    path('<int:pk>/', views.single_post_page), #/blog/ 뒤에 int형태의 값이 붙는 형태라면 single 함수로 처리
     path('', views.index),
 ]
 ```
@@ -542,5 +542,84 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return f'/blog/{self.pk}/'
+```
+
+
+
+### 대문 페이지와 자기소개 페이지 만들기
+
+
+
+do_it_django_prj/urls.py (single_pages 앱 위한 url 지정)
+
+```python
+from django.contrib import admin
+from django.urls import path
+from django.urls import include
+
+urlpatterns = [
+    path('blog/', include('blog.urls')),
+    path('admin/', admin.site.urls),
+    path('', include('single_pages.urls'))
+]
+
+```
+
+
+
+single_pages/urls.py (대문 페이지와 자기소개 페이지의 URL 지정)
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('about_me/', views.about_me),
+    path('', views.landing),
+]
+```
+
+
+
+views.py에 함수 정의
+
+```python
+from django.shortcuts import render
+
+def landing(request):
+    return render(
+        request,
+        'single_pages/landing.html'
+    )
+
+def about_me(request):
+    return render(
+        request,
+        'single_pages/about_me.html'
+    )
+```
+
+
+
+single_pages/templates/single_pages/landing.html (템플릿 파일 만들기)
+
+```html
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>정연우 입니다!</title>
+</head>
+<body>
+<nav>
+    <a href="/blog/">Blog</a>
+    <a href="/about_me/">About me</a>
+</nav>
+
+<h1>안녕하세요 정연우입니다.</h1>
+<h2>대문페이지</h2>
+<h3>아직 만들지 않음</h3>
+</body>
+</html>
 ```
 
