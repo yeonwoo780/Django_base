@@ -731,3 +731,54 @@ def single_post_page(request, pk):
 (...생략...)
 ```
 
+
+
+### CBV로 포스트 상세 페이지 만들기
+
+
+
+blog/views.py
+
+```python
+# from django.shortcuts import render
+from django.views.generic import ListView, DetailView
+from .models import Post # models 에있는 Post모델 들고옴
+
+(...생략...)
+
+class PostDetail(DetailView):
+    model = Post
+
+# def single_post_page(request, pk):
+#     post = Post.objects.get(pk=pk)
+#
+#     return render(
+#         request,
+#         'blog/single_post_page.html',
+#         {
+#             'post': post,
+#         }
+#     )
+```
+
+
+
+blog/urls.py
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    # path('<int:pk>/', views.single_post_page), #/blog/ 뒤에 int형태의 값이 붙는 형태라면 single 함수로 처리
+    path('<int:pk>/', views.PostDetail.as_view()),
+
+    # path('', views.index),
+    path('', views.PostList.as_view()),
+]
+```
+
+
+
+blog/single_post_page.html -> blog/post_detail.html로 이름변경해줌
+
