@@ -314,7 +314,7 @@ from django.shortcuts import render
 def index(request):
     return render(
         request,
-        'blog/index.html',
+        'blog/post_list.html',
     )
 ```
 
@@ -354,7 +354,7 @@ def index(request):
 
     return render(
         request,
-        'blog/index.html',
+        'blog/post_list.html',
         {
             'posts' : posts,
         }
@@ -415,7 +415,7 @@ def index(request):
 
     return render(
         request,
-        'blog/index.html',
+        'blog/post_list.html',
         {
             'posts' : posts
         }
@@ -621,5 +621,113 @@ single_pages/templates/single_pages/landing.html (템플릿 파일 만들기)
 <h3>아직 만들지 않음</h3>
 </body>
 </html>
+```
+
+
+
+### CBV로 포스트 목록 페이지 만들기
+
+
+
+blog/views.py
+
+```python
+from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Post # models 에있는 Post모델 들고옴
+
+class PostList(ListView):
+    model = Post
+
+# def index(request):
+#     # posts = Post.objects.all()  # 모든 Post레코드를 가져와 저장
+#     posts = Post.objects.all().order_by('-pk')  # 모든 Post레코드를 가져와 저장 (가장 최신값으로 업데이트)
+#
+#     return render(
+#         request,
+#         'blog/post_list.html',
+#         {
+#             'posts' : posts
+#         }
+#     )
+
+def single_post_page(request, pk):
+(...생략...)
+```
+
+
+
+blog/urls.py
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('<int:pk>/', views.single_post_page), #/blog/ 뒤에 int형태의 값이 붙는 형태라면 single 함수로 처리
+    # path('', views.index),
+    path('', views.PostList.as_view()),
+]
+```
+
+
+
+blog/index.html -> blog/post_list.html 밑에 코드로 변경후 이름변경
+
+```python
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+
+<h1>Blog</h1>
+<!--{% for p in posts %}-->
+<!--    <hr/>-->
+<!--&lt;!&ndash;    <h2>{{ p.title }}</h2>&ndash;&gt;-->
+<!--    <h2><a href = "{{ p.get_absolute_url }}">{{ p.title }}</a></h2>-->
+<!--    <h4>{{ p.created_at }}</h4>-->
+<!--    <p>{{ p.content }}</p>-->
+<!--{% endfor %}-->
+
+{% for p in post_list %}
+    <hr/>
+<!--    <h2>{{ p.title }}</h2>-->
+    <h2><a href = "{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
+    <h4>{{ p.created_at }}</h4>
+    <p>{{ p.content }}</p>
+{% endfor %}
+</body>
+</html>
+```
+
+
+
+blog/views.py
+
+```python
+from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Post # models 에있는 Post모델 들고옴
+
+class PostList(ListView):
+    model = Post
+	ordering = "-pk" # 가장 최신값으로 업데이트
+# def index(request):
+#     # posts = Post.objects.all()  # 모든 Post레코드를 가져와 저장
+#     posts = Post.objects.all().order_by('-pk')  # 모든 Post레코드를 가져와 저장 (가장 최신값으로 업데이트)
+#
+#     return render(
+#         request,
+#         'blog/post_list.html',
+#         {
+#             'posts' : posts
+#         }
+#     )
+
+def single_post_page(request, pk):
+(...생략...)
 ```
 
