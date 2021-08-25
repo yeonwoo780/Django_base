@@ -491,3 +491,56 @@ blog/templates/blog/single_post_page.html
 </html>
 ```
 
+
+
+
+
+### 포스트 제목에 링크 만들기
+
+
+
+blog/templates/blog/index.html (링크 달림)
+
+```html
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+
+<h1>Blog</h1>
+{% for p in posts %}
+    <hr/>
+<!--    <h2>{{ p.title }}</h2>-->
+    <h2><a href = "{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
+    <h4>{{ p.created_at }}</h4>
+    <p>{{ p.content }}</p>
+{% endfor %}
+</body>
+</html>
+```
+
+
+
+blog/models.py (관리자 페이지에 포스트 열어보면 히스토리 옆에 view on site 생김)
+
+```python
+from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length = 30) # 제목
+    content = models.TextField() # 내용
+
+    # created_at = models.DateTimeField() # 작성일
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"[{self.pk}]{self.title}"
+
+    def get_absolute_url(self):
+        return f'/blog/{self.pk}/'
+```
+
