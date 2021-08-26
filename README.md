@@ -782,3 +782,68 @@ urlpatterns = [
 
 blog/single_post_page.html -> blog/post_detail.html로 이름변경해줌
 
+
+
+
+
+# 정적 파일과 미디어 파일 관리하기
+
+
+
+## 포스트 목록 페이지에 부트스트랩 적용하기
+
+blog/post_list.html 파일을 chapter4에서 만든 blog.html파일 내용으로 복사
+
+->
+
+static 폴더 만들고 css파일 넣기
+
+-> blog/static/blog/bootstrap폴더 만들어서 그안에 css, css.map 넣으면 됨
+
+
+
+blog/post_list.html 파일 css경로 변경해줌
+
+```html
+<!DOCTYPE html>
+{% load static %} <!--추가-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+<!--    <link href="./bootstrap4/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <link rel = "stylesheet" href = "{% static 'blog/bootstrap/bootstrap.min.css' %}"  media="screen"> <!--변경-->
+    <script src="https://kit.fontawesome.com/a8a517f3a9.js" crossorigin="anonymous"></script>
+</head>
+```
+
+
+
+실제 포스트 내용이 표시되도록 수정
+
+-> blog/post_list.html
+
+```html
+                (...생략...)
+                <h1>Blog</h1>
+
+                {% for p in post_list %} <!-- 반복 시켜줌 -->
+                <!-- Blog post-->
+                <div class="card mb-4">
+                    <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
+                    <div class="card-body">
+                        <h2 class="card-title">{{ p.title }}</h2>
+                        <p class="card-text">{{ p.content }}</p>
+                        <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more &rarr;</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Posted on {{ p.created_at }} by
+                        <a href="#">작성자명 쓸 위치(개발예정)</a>
+                    </div>
+                </div>
+                {% endfor %}
+                (...생략...)                
+```
+
